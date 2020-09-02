@@ -1,0 +1,32 @@
+{
+  "name": "streamdeckmonitor",
+  "version": "1.0.0",
+  "description": "Server monitor configuration app for STREAM DECK",
+  "author": "DasPeTe <daspetemail@gmail.com>",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "set NODE_ENV=development&&electron index.js",
+    "production": "set NODE_ENV=production&&yarn buildnuxt&&electron index.js",
+    "postinstall": "electron-builder install-app-deps",
+    "nuxt:build": "nuxt build --config-file=config/client.js",
+    "nuxt:start": "nuxt start --config-file=config/client.js",
+    "pack": "electron-builder --dir",
+    "dist": "set NODE_ENV=production&&yarn nuxt:build&&electron-builder"
+  },
+  "build": {
+    "appId": "com.bitberry.streamdeckmonitor"
+  },
+  "dependencies": {
+    "@nuxtjs/tailwindcss": "^3.0.2",
+    "express": "^4.17.1",
+    "node-sass": "^4.14.1",
+    "nuxt": "^2.14.4",
+    "sass-loader": "^10.0.1"
+  },
+  "devDependencies": {
+    "electron": "^10.1.1",
+    "electron-builder": "^22.8.0",
+    "electron-reloader": "^1.0.1"
+  }
+}
