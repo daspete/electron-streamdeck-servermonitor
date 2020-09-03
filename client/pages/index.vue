@@ -1,8 +1,6 @@
 <template>
-    <div class="page">
-        {{ $store.getters['buttons/Buttons'] }}
-        <button type="button" @click="AddButton">Add Button</button>
-        <!-- <AddButton /> -->
+    <div class="page h-screen w-screen grid grid-cols-5 grid-flow-row gap-1">
+        <DeckButton v-for="button in $store.getters['buttons/Buttons']" :key="`deckbutton-${ button.id }`" :button="button" />
     </div>
 </template>
 
@@ -10,16 +8,21 @@
 const { ipcRenderer } = require('electron')
 
 export default {
+
+    mounted(){
+        ipcRenderer.invoke('renderer.ready', this.$store.getters['buttons/Buttons'])
+    },
+
     methods: {
         AddButton(){
-            // ipcRenderer.invoke('test-action', 1, 2, 3)
-            this.$store.commit('buttons/AddButton', {
-                id: Date.now(),
-                settings: {
-                    buttonId: 0,
-                    testing: 1
-                }
-            })
+            
+            // this.$store.commit('buttons/AddButton', {
+            //     id: Date.now(),
+            //     settings: {
+            //         buttonId: 0,
+            //         testing: 1
+            //     }
+            // })
         }
     }
 }
